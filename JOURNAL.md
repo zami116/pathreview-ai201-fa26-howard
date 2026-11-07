@@ -14,3 +14,17 @@ The app logs through structlog, but structlog isn’t wired into Python’s stan
 **Setup confirmation:** [X] App runs locally at localhost:5173
 
 **Cohort ledger:** [X] Issue added to cohort ledger
+
+**Selection notes ("Is this right for me?" checklist):**
+
+- [x] I can explain the problem and the expected behavior in 2–3 sentences without reading the issue.
+- [x] I've located the relevant files and confirmed they exist in the codebase.
+- [x] I can describe a concrete before-and-after: what the user sees before the fix and what they see after.
+- [x] I'm choosing Tier 1.
+- [x] I'm not choosing a Tier 3 issue to "challenge myself" if I haven't completed a Tier 1 or 2 first — scope surprises in Unit 9 don't have a safety net.
+- [x] I've found and read the specific code the issue references (not just the file — the function or section).
+- [x] I've read enough surrounding context that I can write a rough plan for the fix without looking anything up.
+- [x] I've found the test file for my module and read at least one test end-to-end.
+- [x] I've checked the issue comments and the ledger's Claims count, and I'm fine with how many others are on this issue.
+- [x] I've estimated the time this will take and I'm confident I can complete it before the Unit 9 deadline.
+- [x] This issue has no open blockers or dependencies on other unresolved issues.
