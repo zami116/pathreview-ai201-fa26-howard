@@ -28,3 +28,28 @@ The app logs through structlog, but structlog isn’t wired into Python’s stan
 - [x] I've checked the issue comments and the ledger's Claims count, and I'm fine with how many others are on this issue.
 - [x] I've estimated the time this will take and I'm confident I can complete it before the Unit 9 deadline.
 - [x] This issue has no open blockers or dependencies on other unresolved issues.
+
+## Unit 8 — Reproduction & solution planning
+
+**Reproduction commit link:** [link to commit documenting the reproduced issue]
+
+**Reproduction summary:**
+I ran the failing test with `--runxfail` and saw the warning print to the terminal while `caplog.text` stayed empty, so the assertion at `tests/unit/test_batch_processor.py:48` fails. This shows structlog's output isn't reaching Python's standard logging during tests.
+
+Steps to reproduce:
+
+```bash
+source .venv/Scripts/activate
+pytest tests/unit/test_batch_processor.py::TestBatchEmbeddingProcessor::test_empty_chunks_list_returns_empty -q -s --runxfail
+```
+
+- `--runxfail` is needed because the test is marked `xfail(strict=True)`; without it pytest reports `1 xfailed`.
+- Observed: `[warning] Empty chunks list provided to BatchEmbeddingProcessor` prints to the terminal, then `AssertionError: assert ('Empty chunks list' in '' or False)`.
+- structlog is configured in `core/logging.py` (line 40). Only one test currently uses `caplog`.
+
+**PLAN.md link:** [link to PLAN.md in your fork]
+
+**Walkthrough video (recommended):** [link to your Loom video, ≤2 min — recommended, not graded]
+
+**Blockers or open questions:**
+[Anything you're still uncertain about going into Unit 9, or leave blank]
