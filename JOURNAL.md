@@ -31,7 +31,7 @@ The app logs through structlog, but structlog isn’t wired into Python’s stan
 
 ## Unit 8 — Reproduction & solution planning
 
-**Reproduction commit link:** [link to commit documenting the reproduced issue]
+**Reproduction commit link:** [https://github.com/zami116/pathreview-ai201-fa26-howard/commit/46af9b088bdfa353f5f9803603e39d128aa41dad](https://github.com/zami116/pathreview-ai201-fa26-howard/commit/46af9b088bdfa353f5f9803603e39d128aa41dad)
 
 **Reproduction summary:**
 I ran the failing test with `--runxfail` and saw the warning print to the terminal while `caplog.text` stayed empty, so the assertion at `tests/unit/test_batch_processor.py:48` fails. This shows structlog's output isn't reaching Python's standard logging during tests.
@@ -47,9 +47,11 @@ pytest tests/unit/test_batch_processor.py::TestBatchEmbeddingProcessor::test_emp
 - Observed: `[warning] Empty chunks list provided to BatchEmbeddingProcessor` prints to the terminal, then `AssertionError: assert ('Empty chunks list' in '' or False)`.
 - structlog is configured in `core/logging.py` (line 40). Only one test currently uses `caplog`.
 
-**PLAN.md link:** [link to PLAN.md in your fork]
+**PLAN.md link:** [PLAN.md](https://github.com/zami116/pathreview-ai201-fa26-howard/blob/fix/66-structlog-caplog/PLAN.md)
 
 **Walkthrough video (recommended):** [link to your Loom video, ≤2 min — recommended, not graded]
 
 **Blockers or open questions:**
-[Anything you're still uncertain about going into Unit 9, or leave blank]
+
+- Not sure yet whether cache_logger_on_first_use=True affects loggers created before the test fixture runs; I'll check this in Unit 9.
+- `configure_logging()` is only called from `scripts/seed_db.py`, so the API itself doesn't set up logging either. I'm not sure if that's intended, but I'm keeping the fix scoped to the tests as the issue describes.
